@@ -1,0 +1,63 @@
+<section id="home">
+  <div
+    id="myCarousel"
+    class="carousel slide"
+    data-ride="carousel"
+    data-interval="1000"
+  >
+    <ngb-carousel>
+      <ng-template ngbSlide>
+        <img src="https://rukminim1.flixcart.com/flap/3376/560/image/7e15cb91f79c20aa.jpg?q=50" alt="first" class="item" height="300" widht='200'/>
+      </ng-template>
+      <ng-template ngbSlide>
+        <img src="https://rukminim1.flixcart.com/flap/3376/560/image/5356c6a0a59d62ba.jpg?q=50" alt="second" class="item" height="300" widht='200' />
+      </ng-template>
+      <ng-template ngbSlide>
+        <img src="https://rukminim1.flixcart.com/flap/3600/3600/image/045c52e756d1b8b8.jpg?q=80" alt="third" class="item" height="370" widht='200'/>
+      </ng-template>
+      <ng-template ngbSlide>
+        <img src="https://www.apple.com/v/home/ai/images/heroes/macbook-pro/hero_macbookpro__eatonjfwvuc2_large.jpg" alt="fourth" class="item" height="300" widht='200'/>
+      </ng-template>
+      <ng-template ngbSlide>
+        <img src="https://images.samsung.com/is/image/samsung/assets/in/tvs/8369-UHD-s.com-PFP_1440x334.jpg?imwidth=1536" alt="fifth" class="item" />
+      </ng-template>
+      <ng-template ngbSlide>
+        <img src="https://images.samsung.com/is/image/samsung/assets/in/home/8004_Neo-QLED-PFP-Page-Banners_1440x344.jpg?imwidth=1536" alt="sixth" class="item" />
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <div class="container p-5">
+    <app-message></app-message>
+    <p class="lead">
+      <b>Recommended Deals: Last-Minute Deals</b>
+    </p>
+    <div class="row">
+      <div *ngIf="!products" class="m-auto">
+        <h1 class="text-center display-3 mt-5">
+          <i class="fa fa-spinner fa-spin"></i>
+        </h1>
+      </div>
+      <div
+        *ngFor="
+          let product of products | slice: (page - 1) * 4:(page - 1) * 4 + 8w
+        "
+        class="col-md-3 mb-5"
+       >
+        <a routerLink="/product/{{ product._id }}">
+          <div class="card">
+            <img src="{{ product.image }}" alt="product"  />
+            <div >
+              <h5 class="card-title">{{ product.title }}</h5>
+              <p class="card-text">{{ product.price | currency }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <ngb-pagination
+      [collectionSize]="lengthProducts"
+      [pageSize]="4"
+      [(page)]="page"
+    ></ngb-pagination>
+  </div>
+</section>
